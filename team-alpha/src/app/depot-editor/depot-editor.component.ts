@@ -9,8 +9,10 @@ export class DepotEditorComponent implements OnInit {
 
   @Input() depot: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.depot = { "name": "default", "node": { "lat":1, "lon":1 } };
   }
 }
