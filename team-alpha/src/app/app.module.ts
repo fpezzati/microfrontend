@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DepotEditorComponent } from './depot-editor/depot-editor.component';
+import { GenericPlaceComponent } from './generic-place/generic-place.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DepotEditorComponent
+    DepotEditorComponent,
+    GenericPlaceComponent
   ],
   imports: [
     BrowserModule

@@ -1,0 +1,9 @@
+<div *ngIf="place">
+  <li *ngFor="let attr of stripAttributes(place)">
+    <span *ngIf="attributeIsNotAnObject(attr.value); else isAnObject">{{attr.key}} {{attr.value}}</span>
+    <ng-template #isAnObject>
+      {{attr.key}}<br>
+      <app-generic-place [place]="attr.value"></app-generic-place>
+    </ng-template>
+  </li>
+</div>
