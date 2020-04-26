@@ -23,10 +23,6 @@ export class GenericPlaceComponent implements OnInit {
 
   attributeIsNotAnObject(attribute: any) {
     console.log(JSON.stringify(attribute));
-    if (typeof attribute === 'object' && attribute !== null) {
-      return false;
-    } else {
-      return true;
-    }
+    return !(typeof attribute === 'object' && attribute !== null);
   }
 }
