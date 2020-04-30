@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewContainerRef, ViewChild, Directive } from '@angular/core';
+import { DepotEditorComponent } from './depot-editor/depot-editor.component';
+import { GenericPlaceComponent } from './generic-place/generic-place.component';
+
+@Directive({ selector: '[detailContainer]'})
+export class DetailContainer {
+  constructor(public viewContainerRef: ViewContainerRef) {}
+}
 
 @Component({
   selector: 'app-root',
@@ -10,28 +17,29 @@ export class AppComponent {
   detailTypeMap = {};
   depot = {};
   place = {};
-  @ViewChild("detailContainer", { read: detailContainerRef }) container;
+  @ViewChild(DetailContainer, {static: true}) detailContainer: DetailContainer;
 
-  constructor(private componentFactory: ComponentFactoryResolver) {
+  constructor(private componentFactory: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) {
     this.depot = { "name": "some depot", "node": { "lat":10, "lon":10 } };
     this.place = { "type": "parking area", "node": { "lat":20, "lon":20 }, "parking places": 20, "watched": true};
 
-    this.detailTypeMap.depot = this.componentFactory.resolveComponentFactory(DepotEditorComponent);
-    this.detailTypeMap.default = this.componentFactory.resolveComponentFactory(GenericPlaceComponent);
+    this.detailTypeMap["depot"] = DepotEditorComponent;
+    this.detailTypeMap["default"] = GenericPlaceComponent;
 
     this.addDepot();
   }
 
-  renderComponent(cmpnnt: any) {
-
+  renderComponent(component: any) {
+    this.viewContainerRef.clear();
+    this.viewContainerRef.createComponent(this.componentFactory.resolveComponentFactory(component));
   }
 
   addDepot() {
-    this.container = this.detailTypeMap["depot"].create();
+    this.renderComponent(this.detailTypeMap["depot"]);
   }
 
   addSomethingelse() {
-    this.container = this.detailTypeMap["default"].create();
+    this.renderComponent(this.detailTypeMap["default"]);
   }
 
   ngOnInit(): void {}
