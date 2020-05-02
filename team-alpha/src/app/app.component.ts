@@ -1,11 +1,7 @@
-import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewContainerRef, ViewChild, Directive } from '@angular/core';
+import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewContainerRef, ViewChild, Directive, TemplateRef } from '@angular/core';
 import { DepotEditorComponent } from './depot-editor/depot-editor.component';
 import { GenericPlaceComponent } from './generic-place/generic-place.component';
-
-@Directive({ selector: '[detailContainer]'})
-export class DetailContainer {
-  constructor(public viewContainerRef: ViewContainerRef) {}
-}
+import { LocationDetailDirective } from './location-detail.directive';
 
 @Component({
   selector: 'app-root',
@@ -17,32 +13,37 @@ export class AppComponent {
   detailTypeMap = {};
   depot = {};
   place = {};
-  @ViewChild(DetailContainer, {static: true}) detailContainer: DetailContainer;
+  vchild: ViewContainerRef;
+  @ViewChild(LocationDetailDirective, {static: true}) detailContainer: LocationDetailDirective;
 
-  constructor(private componentFactory: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) {
+  constructor(private componentFactory: ComponentFactoryResolver) {
     this.depot = { "name": "some depot", "node": { "lat":10, "lon":10 } };
     this.place = { "type": "parking area", "node": { "lat":20, "lon":20 }, "parking places": 20, "watched": true};
-
-    this.detailTypeMap["depot"] = DepotEditorComponent;
-    this.detailTypeMap["default"] = GenericPlaceComponent;
-
-    this.addDepot();
   }
 
   renderComponent(component: any) {
-    this.viewContainerRef.clear();
-    this.viewContainerRef.createComponent(this.componentFactory.resolveComponentFactory(component));
+    this.detailContainer.viewContainerRef.clear();
+    var cmpnt = this.detailContainer.viewContainerRef.createComponent(this.componentFactory.resolveComponentFactory(component));
   }
 
   addDepot() {
-    this.renderComponent(this.detailTypeMap["depot"]);
+    this.detailContainer.viewContainerRef.clear();
+    var cmpnt = this.detailContainer.viewContainerRef.createComponent(this.componentFactory.resolveComponentFactory(this.detailTypeMap["depot"]));
+    (<DepotEditorComponent>cmpnt.instance).depot = this.depot;
+  //  this.renderComponent(this.detailTypeMap["depot"]);
   }
 
   addSomethingelse() {
-    this.renderComponent(this.detailTypeMap["default"]);
+    this.detailContainer.viewContainerRef.clear();
+    var cmpnt = this.detailContainer.viewContainerRef.createComponent(this.componentFactory.resolveComponentFactory(this.detailTypeMap["default"]));
+    (<GenericPlaceComponent>cmpnt.instance).place = this.place;
+  //  this.renderComponent(this.detailTypeMap["default"]);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.detailTypeMap["depot"] = DepotEditorComponent;
+    this.detailTypeMap["default"] = GenericPlaceComponent;
+  }
 
   ngOnDestroy(): void {}
 }
