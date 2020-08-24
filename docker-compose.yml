@@ -7,6 +7,10 @@ services:
       context: ./nginx
     ports:
       - '8000:80'
+    depends_on:
+      - alpha
+      - one
+      - zero
   alpha:
     build:
       dockerfile: Dockerfile.dev
