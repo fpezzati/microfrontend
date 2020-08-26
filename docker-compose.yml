@@ -15,17 +15,11 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-alpha
-    ports:
-      - '4200:4200'
   one:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-one
-    ports:
-      - '9000:9000'
   zero:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-zero
-    ports:
-      - '9001:9001'
