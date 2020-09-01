@@ -23,3 +23,5 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-zero
+    ports:
+      - '9000:9000'

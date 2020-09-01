@@ -18,6 +18,6 @@ window.customElements.define('team-zero', class TeamZero extends HTMLElement {
     });
   }
   connectedCallback() {
-    console.log('connected!');
+    console.log('connected and ready!');
   }
 });
