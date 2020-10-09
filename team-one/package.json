@@ -6,10 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run": "webpack",
-    "dev": "webpack-dev-server --public --disable-host-check",
-    "dev_new1": "webpack-dev-server --mode development --host 0.0.0.0 --disableHostCheck",
-    "dev_new2": "webpack-dev-server --mode development --host 0.0.0.0 --disableHostCheck --contentBase zero",
-    "dev_old1": "webpack-dev-server --mode development --host 0.0.0.0 --hot --open --disableHostCheck --useLocalIp"
+    "dev": "webpack-dev-server --mode development --host 0.0.0.0 --disableHostCheck"
   },
   "author": "",
   "license": "ISC",

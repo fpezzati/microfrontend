@@ -10,7 +10,7 @@ services:
     depends_on:
       - alpha
       - one
-      - zero
+#      - zero
   alpha:
     build:
       dockerfile: Dockerfile.dev
@@ -19,9 +19,9 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-one
-  zero:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./team-zero
-    ports:
-      - '9000:9000'
+#  zero:
+#    build:
+#      dockerfile: Dockerfile.dev
+#      context: ./team-zero
+#    ports:
+#      - '9000:9000'
