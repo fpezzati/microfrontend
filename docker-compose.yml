@@ -18,3 +18,7 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-one
+  home:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./team-home
