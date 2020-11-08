@@ -7,6 +7,7 @@ services:
       context: ./nginx
     ports:
       - '8000:80'
+    command: [nginx-debug, '-g', 'daemon off;']
     depends_on:
       - alpha
       - one
@@ -18,6 +19,8 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-one
+    ports:
+      - '9001:9001'
   home:
     build:
       dockerfile: Dockerfile.dev
