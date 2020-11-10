@@ -11,6 +11,8 @@ services:
     depends_on:
       - alpha
       - one
+      - zero
+      - home
   alpha:
     build:
       dockerfile: Dockerfile.dev
@@ -19,8 +21,12 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./team-one
+  zero:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./team-zero
     ports:
-      - '9001:9001'
+      - '9000:9000'
   home:
     build:
       dockerfile: Dockerfile.dev
