@@ -4,6 +4,7 @@ tmplt.innerHTML = `
   <label for="sendnpt">message:</label>
   <input id="sendnpt" type="text"></input>
   <button id="sendbtn">Send the message</button>
+  <div id="msglog"></div>
 </div>
 `;
 
