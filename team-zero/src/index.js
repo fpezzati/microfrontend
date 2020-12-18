@@ -18,8 +18,13 @@ window.customElements.define('team-zero', class TeamZero extends HTMLElement {
     this.button = this._shadowRoot.getElementById('sendbtn');
     input = this._shadowRoot.getElementById('sendnpt');
     this.button.addEventListener('click', function(evt) {
-      var msg = { bubbles: true, detail: {} };
-      msg.detail.name = input.value;
+      var msg = {
+        bubbles: true,
+        composed: true,
+        detail: {
+          name: input.value
+        }
+      };
       console.log('sending msg: ' + JSON.stringify(msg))
       window.dispatchEvent(new CustomEvent('greet', msg));
     });

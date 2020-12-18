@@ -4,7 +4,7 @@ window.customElements.define('team-one', class TeamOne extends HTMLElement {
     super();
     this._shadowRoot = this.attachShadow({ 'mode': 'open' });
     window.addEventListener('greet', (msg) => {
-      console.log("a message arrives: " + JSON.stringify(msg));
+      console.log("a message arrives: " + JSON.stringify(msg.detail));
     });
   }
   connectedCallback() {
